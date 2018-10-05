@@ -1,11 +1,29 @@
 class Router {
 
-    contructor() {
-        this.test = 'test';
+    constructor(routes, element) {
+        this.routes = routes;
+        this.element = element;
+
+        window.onhashchange = this.hashChanged.bind(this);
+        this.hashChanged();
     }
 
-    static testFunc () {
-        return console.log('testing');
+    async hashChanged (event) {
+        if (window.location.hash.length) {
+            // Get the new page and render it.
+            const pageName = window.location.hash.substr(1);
+            this.render(pageName);
+        } else {
+            // If no path - render default
+            this.render('#default');
+        }
+    }
+
+    async render (pageName) {
+        const page = this.routes[pageName];
+        await page.load();
+        this.element.innerHTML = '';
+        page.render(this.element);
     }
 }
 
