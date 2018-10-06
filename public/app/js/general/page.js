@@ -8,7 +8,7 @@ class Page {
         return fetch(this.url)
             .then(response => response.text())
             .then(data => this.html = data)
-            .catch(err => this.html = 'SOMETHING WENT WRONG!');
+            .catch(err => this.html = 'Something went wrong!');
     }
 
     render (element) {

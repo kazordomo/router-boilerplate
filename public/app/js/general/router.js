@@ -20,7 +20,12 @@ class Router {
     }
 
     async render (pageName) {
-        const page = this.routes[pageName];
+        console.log(this.routes);
+        let page = this.routes[pageName];
+        
+        if(!page)
+            page = this.routes['notFound'];
+
         await page.load();
         this.element.innerHTML = '';
         page.render(this.element);
