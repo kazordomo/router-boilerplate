@@ -20,7 +20,6 @@ class Router {
     }
 
     async render (pageName) {
-        console.log(this.routes);
         let page = this.routes[pageName];
         
         if(!page)
