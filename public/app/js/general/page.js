@@ -1,7 +1,8 @@
 class Page {
 
-    constructor (url) {
+    constructor (url, script = null) {
         this.url = `app/views/${url}`;
+        this.script = script;
     }
 
     load () {
@@ -11,8 +12,17 @@ class Page {
             .catch(err => this.html = 'Something went wrong!');
     }
 
+    loadScript (script) {
+        switch(script) {
+            default:
+                return false;
+        }
+    }
+
     render (element) {
         element.innerHTML = this.html;
+        // Be sure that we render the html before the script
+        setTimeout(() => this.loadScript(this.script), 0);
     }
 }
 
